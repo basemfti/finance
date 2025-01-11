@@ -1,0 +1,344 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+
+/* General Navbar Styling */
+.navbar {
+  padding: 10px 15px;
+  background-color: #f8f9fa; /* Light gray background */
+  border-bottom: 1px solid #ddd;
+}
+
+/* Logo Image Styling */
+.navbar-brand img {
+  height: 40px; /* Adjust logo height */
+  width: auto;  /* Maintain aspect ratio */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px; /* Add some space if needed */
+  transition: transform 0.3s; /* Add a hover effect */
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+  opacity: 0.9; /* Slightly reduce opacity on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-brand img {
+      height: 30px; /* Smaller logo for mobile screens */
+  }
+}
+
+
+/* Navbar Styling */
+
+nav.navbar {
+  background: linear-gradient(135deg, #1d3557, #457b9d); /* Gradient background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Navbar Brand */
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+/* Highlight Color for Brand */
+.navbar-brand .brand-highlight {
+  color: #f5b82e; /* Golden yellow */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar Links */
+.nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: capitalize;
+  transition: color 0.3s, text-decoration 0.3s;
+  padding: 10px;
+}
+
+.nav-link:hover {
+  color: #f5b82e; /* Golden yellow hover */
+  text-decoration: underline;
+}
+
+/* Navbar Button (Toggler) */
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0) invert(1); /* White icon */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-nav {
+      text-align: center;
+      background: #1d3557; /* Same as navbar background */
+      padding: 10px;
+      border-radius: 5px;
+  }
+
+  .nav-link {
+      display: block;
+      margin: 5px 0;
+  }
+}
+
+
+
+/* Navbar Styling */
+nav.navbar {
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+  color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+/* Navbar Brand */
+/* General Styling */
+
+
+/* Navbar Styling */
+nav.navbar {
+  background: linear-gradient(135deg, #1d3557, #457b9d); /* Gradient background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: #ffffff;
+}
+
+nav .navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+
+
+nav .nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: capitalize;
+  transition: color 0.3s, text-decoration 0.3s;
+  padding: 10px;
+}
+
+nav .nav-link:hover {
+  color: #f5b82e; /* Highlight color */
+  text-decoration: underline;
+}
+
+/* Navbar Button (Toggler) */
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0) invert(1); /* Make icon white */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav .navbar-nav {
+      text-align: center;
+      background: #1d3557; /* Same as navbar background */
+      padding: 10px;
+      border-radius: 5px;
+  }
+
+  nav .nav-link {
+      display: block;
+      margin: 5px 0;
+  }
+}
+
+/* Dropdown Styling */
+nav .dropdown-menu {
+  background-color: black;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav .dropdown-item {
+  color: #ffffff;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav .dropdown-item:hover {
+  background-color: #f5b82e;
+  color: #000000;
+}
+
+
+/* General Styles */
+
+
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table thead th {
+  text-align: center;
+  background: linear-gradient(135deg, #007bff, #6610f2);
+  color: #ffffff;
+  font-weight: bold;
+  padding: 15px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.table tbody td, .table tfoot td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #495057;
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+}
+
+/* Striped Rows */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f7f7f7;
+}
+
+/* Footer and Highlight Rows */
+.table-dark {
+  background: linear-gradient(135deg, #343a40, #495057);
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.table-light tfoot tr {
+  background: #f8f9fa;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Titles and Headers */
+h2 {
+  color: #495057;
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Button-Like Table Cells for Interactivity */
+.table tbody td {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.table tbody td:hover {
+  color: #007bff;
+}
+
+/* Cash Row Highlight */
+.table tbody tr:last-of-type td {
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+      padding: 15px;
+  }
+
+  h2 {
+      font-size: 24px;
+  }
+
+  .table thead th, .table tbody td {
+      padding: 10px;
+      font-size: 12px;
+  }
+}
+
+

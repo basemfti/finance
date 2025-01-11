@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/profile.css"> <!-- Optional CSS -->
+</head>
+
+{% block main %}
+    <div class="profile-container">
+        <img src="https://avatar.iran.liara.run/public" alt="{{ username }}'s Avatar" class="avatar">
+        <h1>Welcome, {{ username }}</h1>
+        <p><strong>Available Cash:</strong> {{ cash }}</p>
+        <p><a href="/">Back to Dashboard</a></p>
+    </div>
+{% endblock %}
