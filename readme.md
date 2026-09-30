@@ -1,4 +1,3 @@
-
 # 💰 Finance — Stock Trading Web Application
 
 A full-stack stock trading web application built with **Python, Flask, SQLite, HTML, CSS, and JavaScript**.
@@ -15,13 +14,13 @@ This project was developed as part of **CS50: Introduction to Computer Science**
 
 The portfolio page displays the user's current stock holdings, available cash, and total portfolio value.
 
-![Portfolio](finannce.png)
+![Portfolio](1.png)
 
-### Transaction History
+### Transaction Login
 
-Users can view their complete history of stock purchases and sales, including the stock symbol, number of shares, price, total value, and transaction timestamp.
+Users can login to his old account or  create a new account.
 
-![Transaction History](finance2.png)
+![Transaction History](22.png)
 
 ---
 
