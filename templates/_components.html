@@ -1,0 +1,6 @@
+{% macro avatar(name, size="md") -%}
+    {% set words = (name|string|trim).split() %}
+    <span class="avatar avatar-{{ size }}" role="img" aria-label="{{ name }}'s avatar">
+        {% if words|length > 1 %}{{ words[0][0]|upper }}{{ words[-1][0]|upper }}{% elif words %}{{ words[0][0]|upper }}{% else %}?{% endif %}
+    </span>
+{%- endmacro %}

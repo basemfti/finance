@@ -1,18 +1,30 @@
 {% extends "layout.html" %}
 {% block title %}
-   Quote
+Stock quote
 {% endblock %}
 
 {% block main %}
-   <h2>Get a Stock Quote</h2>
-   <form action="{{ url_for('quote') }}" method="post">
-
-     <input type="text" name="symbol" id="symbol" placeholder="Enter stock symbol" required>
-     <button type="submit" class="btn btn-primary">Get Quote</button>
-   </form>
-
-   {% if quote %}
-     <h3>{{ quote['name'] }} ({{ quote['symbol'] }})</h3>
-     <p>Price: {{ quote['price'] | usd }}</p>
-   {% endif %}
+<header class="page-heading text-center">
+     <p class="eyebrow">Research</p>
+     <h1 class="page-title">Look up a stock</h1>
+     <p class="page-subtitle">Get the latest available quote by ticker symbol.</p>
+</header>
+<section class="panel form-panel">
+     <div class="panel-body">
+         <form action="{{ url_for('quote') }}" method="post">
+             <div class="mb-3 text-start">
+                 <label class="form-label" for="symbol">Stock symbol</label>
+                 <input autocomplete="off" autofocus class="form-control text-uppercase" type="text" name="symbol" id="symbol" placeholder="For example, AAPL" required>
+             </div>
+             <button type="submit" class="btn btn-primary w-100 py-2">Get quote</button>
+         </form>
+         {% if quote %}
+             <div class="quote-result" role="status">
+                 <span class="ticker">{{ quote["symbol"] }}</span>
+                 <h2 class="section-heading mt-3">{{ quote["name"] }}</h2>
+                 <p class="quote-price">{{ quote["price"] | usd }}</p>
+             </div>
+         {% endif %}
+     </div>
+</section>
 {% endblock %}

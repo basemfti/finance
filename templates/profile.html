@@ -1,17 +1,31 @@
 {% extends "layout.html" %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="/static/profile.css"> <!-- Optional CSS -->
-</head>
+
+{% block title %}Profile{% endblock %}
 
 {% block main %}
-    <div class="profile-container">
-        <img src="https://avatar.iran.liara.run/public" alt="{{ username }}'s Avatar" class="avatar">
-        <h1>Welcome, {{ username }}</h1>
-        <p><strong>Available Cash:</strong> {{ cash }}</p>
-        <p><a href="/">Back to Dashboard</a></p>
+{% from "_components.html" import avatar %}
+<header class="page-heading">
+    <p class="eyebrow">Account</p>
+    <h1 class="page-title">Your profile</h1>
+    <p class="page-subtitle">Your account details and available balance.</p>
+</header>
+<section class="panel profile-panel">
+    <div class="profile-header">
+        {{ avatar(username, "lg") }}
+        <div>
+            <h2>{{ username }}</h2>
+            <p>Finance account</p>
+        </div>
     </div>
+    <div class="profile-details">
+        <div class="profile-detail">
+            <span class="profile-detail-label">Username</span>
+            <span class="profile-detail-value">{{ username }}</span>
+        </div>
+        <div class="profile-detail">
+            <span class="profile-detail-label">Available cash</span>
+            <span class="profile-detail-value">{{ cash }}</span>
+        </div>
+    </div>
+</section>
 {% endblock %}

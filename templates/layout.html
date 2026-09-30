@@ -1,80 +1,72 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
-
     <head>
-
         <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, width=device-width">
-        
-
-
-        <!-- http://getbootstrap.com/docs/5.3/ -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#f7f9fc">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-        <!-- https://favicon.io/emoji-favicons/money-bag/ -->
-        <link href="/static/favicon.ico" rel="icon">
-
-        <link href="/static/styles.css" rel="stylesheet">
-
-
-        <title>C$50 Finance: {% block title %}{% endblock %}</title>
-
+        <link href="{{ url_for('static', filename='app.css') }}" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+        <title>Finance — {% block title %}{% endblock %}</title>
     </head>
-
     <body>
-
-        <nav class="bg-light border navbar navbar-expand-md navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <img src="static/finance.jpg">
+        <nav class="navbar navbar-expand-lg site-navbar">
+            <div class="container nav-container">
+                <a class="navbar-brand" href="{{ url_for('index') if session.get('user_id') else url_for('login') }}">
+                    <span class="brand-mark" aria-hidden="true">$</span>
+                    <span>Finance<span class="brand-period">.</span></span>
                 </a>
-                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#site-navigation" aria-controls="site-navigation" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbar">
-                    {% if session["user_id"] %}
-                        <ul class="navbar-nav me-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/quote">Quote</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-
+                <div class="collapse navbar-collapse" id="site-navigation">
+                    {% if session.get("user_id") %}
+                        <ul class="navbar-nav mx-lg-auto nav-links">
+                            <li class="nav-item"><a class="nav-link {{ 'active' if request.endpoint == 'index' else '' }}" href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}aria-current="page"{% endif %}>Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link {{ 'active' if request.endpoint == 'quote' else '' }}" href="{{ url_for('quote') }}" {% if request.endpoint == 'quote' %}aria-current="page"{% endif %}>Get a quote</a></li>
+                            <li class="nav-item"><a class="nav-link {{ 'active' if request.endpoint == 'buy' else '' }}" href="{{ url_for('buy') }}" {% if request.endpoint == 'buy' %}aria-current="page"{% endif %}>Buy</a></li>
+                            <li class="nav-item"><a class="nav-link {{ 'active' if request.endpoint == 'sell' else '' }}" href="{{ url_for('sell') }}" {% if request.endpoint == 'sell' %}aria-current="page"{% endif %}>Sell</a></li>
+                            <li class="nav-item"><a class="nav-link {{ 'active' if request.endpoint == 'history' else '' }}" href="{{ url_for('history') }}" {% if request.endpoint == 'history' %}aria-current="page"{% endif %}>Activity</a></li>
                         </ul>
-                        <ul class="navbar-nav ms-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                        </ul>
+                        <div class="nav-account">
+                            {% if current_user %}
+                                <a class="account-link" href="{{ url_for('profile') }}">
+                                    {% from "_components.html" import avatar %}
+                                    {{ avatar(current_user.username, "sm") }}
+                                    <span>{{ current_user.username }}</span>
+                                </a>
+                            {% endif %}
+                            <a class="nav-logout" href="{{ url_for('logout') }}">Log out</a>
+                        </div>
                     {% else %}
-                        <ul class="navbar-nav ms-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
-                        </ul>
+                        <div class="nav-account ms-lg-auto">
+                            <a class="nav-link {{ 'active' if request.endpoint == 'login' else '' }}" href="{{ url_for('login') }}">Log in</a>
+                            <a class="btn btn-primary btn-sm nav-signup" href="{{ url_for('register') }}">Create account</a>
+                        </div>
                     {% endif %}
                 </div>
             </div>
         </nav>
 
-        {% if get_flashed_messages() %}
-            <header>
-                <div class="alert alert-primary mb-0 text-center" role="alert">
-                    {{ get_flashed_messages() | join(" ") }}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="container flash-container" role="status">
+                    {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Dismiss"></button>
+                        </div>
+                    {% endfor %}
                 </div>
-            </header>
-        {% endif %}
+            {% endif %}
+        {% endwith %}
 
-        <main class="container py-5 text-center">
+        <main class="container page-shell">
             {% block main %}{% endblock %}
         </main>
 
-        <footer class="mb-5">
-            
-            </form>
-         
+        <footer class="site-footer">
+            <div class="container">Finance <span aria-hidden="true">·</span> Your portfolio, at a glance.</div>
         </footer>
-
     </body>
-
 </html>

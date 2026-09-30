@@ -1,30 +1,47 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  HISTORY
+Activity
 {% endblock %}
 
 {% block main %}
-  <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Symbol</th>
-            <th>Shares</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Timestamp</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for transaction in transactions %}
-        <tr>
-            <td> {{ transaction.symbol }}</td>
-            <td> {{ transaction.shares }}</td>
-            <td> {{ transaction.price }}</td>
-            <td> {{ transaction.shares * transaction.price }}</td>
-            <td> {{ transaction.timestamp }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  </table>
+<header class="page-heading">
+  <p class="eyebrow">Account activity</p>
+  <h1 class="page-title">Transaction history</h1>
+  <p class="page-subtitle">A record of your stock purchases and sales.</p>
+</header>
+<section class="panel">
+  {% if transactions %}
+      <div class="table-wrap border-0 rounded-0">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Symbol</th>
+                      <th scope="col">Shares</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for transaction in transactions %}
+                  <tr>
+                      <td><span class="ticker">{{ transaction.symbol }}</span></td>
+                      <td class="{{ 'text-positive' if transaction.shares > 0 else 'text-danger' }}">{{ transaction.shares }}</td>
+                      <td>{{ transaction.price | usd }}</td>
+                      <td class="fw-semibold">{{ (transaction.shares * transaction.price) | abs | usd }}</td>
+                      <td class="text-secondary text-nowrap">{{ transaction.timestamp }}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  {% else %}
+      <div class="empty-state">
+          <h2>No transactions yet</h2>
+          <p>Your purchases and sales will appear here.</p>
+          <a class="btn btn-primary" href="{{ url_for('quote') }}">Explore a stock</a>
+      </div>
+  {% endif %}
+</section>
 {% endblock %}

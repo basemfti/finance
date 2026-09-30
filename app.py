@@ -22,6 +22,17 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 
+@app.context_processor
+def inject_current_user():
+    """Make the signed-in user's name available to shared templates."""
+    user_id = session.get("user_id")
+    if user_id is None:
+        return {"current_user": None}
+
+    users = db.execute("SELECT username FROM users WHERE id = ?", user_id)
+    return {"current_user": users[0] if users else None}
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -49,16 +60,12 @@ def profile():
     if not user:
         return apology("User not found", 404)
 
-    # Generate the avatar URL
     username = user[0]["username"]
-    avatar_url = f"https://avatar.iran.liara.run/public/{username}"
 
-    # Pass user information and avatar URL to the template
     return render_template(
         "profile.html",
         username=username,
-        cash=usd(user[0]["cash"]),  # Format cash as currency
-        avatar_url=avatar_url
+        cash=usd(user[0]["cash"])
     )
 
 
@@ -73,7 +80,7 @@ def index():
     # Query to get all stocks grouped by symbol for the user
     stocks = db.execute(
         "SELECT symbol, price, SUM(shares) AS totalShares "
-        "FROM transactions WHERE user_id = ? GROUP BY symbol",
+        "FROM transactions WHERE user_id = ? GROUP BY symbol HAVING SUM(shares) > 0",
         user_id
     )
 
@@ -309,4 +316,3 @@ def sell():
 
     else:
         return render_template("sell.html", stocks=stocks)
-

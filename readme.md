@@ -36,6 +36,7 @@ Users can view their complete history of stock purchases and sales, including th
 - 💰 Cash balance tracking
 - 📜 Transaction history
 - 👤 User profile
+- 🟢 Consistent initials-based avatars in the navigation and profile
 - 🗄️ SQLite database
 - 📱 Responsive web interface
 - ⚠️ Input validation and error handling

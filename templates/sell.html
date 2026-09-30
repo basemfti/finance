@@ -1,24 +1,41 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Sell Shares
+Sell shares
 {% endblock %}
 
 {% block main %}
-<h3>Sell Shares</h3>
-<form action="/sell" method="post">
-
-        <select class="form-control" name="symbol" id="symbol" required>
-        <option value="">Select a stock</option>
-        {% for stock in stocks %}
-        <option value="{{stock.symbol }}">{{ stock.name}} ({{stock.symbol}})</option>
-        {% endfor %}
-        </select>
-
-
-        <input class="form-group" name="shares" placeholder="Shares" type="number">
-        </div>
-        <button type="submit" class="btn btn-primary">Sell</button>
-
-</form>
+<header class="page-heading text-center">
+    <p class="eyebrow">Manage your portfolio</p>
+    <h1 class="page-title">Sell shares</h1>
+    <p class="page-subtitle">Choose a holding and the number of shares to sell.</p>
+</header>
+<section class="panel form-panel">
+    <div class="panel-body">
+        {% if stocks %}
+            <form action="{{ url_for('sell') }}" method="post">
+                <div class="mb-3 text-start">
+                    <label class="form-label" for="symbol">Stock</label>
+                    <select class="form-select" name="symbol" id="symbol" required>
+                        <option value="">Select a stock</option>
+                        {% for stock in stocks %}
+                        <option value="{{ stock.symbol }}">{{ stock.symbol }} · {{ stock.total_shares }} shares</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-4 text-start">
+                    <label class="form-label" for="shares">Number of shares</label>
+                    <input class="form-control" id="shares" name="shares" min="1" step="1" placeholder="1" required type="number">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2">Sell shares</button>
+            </form>
+        {% else %}
+            <div class="empty-state">
+                <h2>No shares to sell yet</h2>
+                <p>Your available holdings will appear here.</p>
+                <a class="btn btn-primary" href="{{ url_for('buy') }}">Buy a stock</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
 {% endblock %}

@@ -5,13 +5,25 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+    <header class="page-heading text-center">
+        <p class="eyebrow">Welcome back</p>
+        <h1 class="page-title">Log in to Finance</h1>
+        <p class="page-subtitle">Pick up where you left off.</p>
+    </header>
+    <section class="panel form-panel">
+        <div class="panel-body">
+            <form action="{{ url_for('login') }}" method="post">
+                <div class="mb-3 text-start">
+                    <label class="form-label" for="username">Username</label>
+                    <input autocomplete="username" autofocus class="form-control" id="username" name="username" placeholder="Your username" required type="text">
+                </div>
+                <div class="mb-4 text-start">
+                    <label class="form-label" for="password">Password</label>
+                    <input autocomplete="current-password" class="form-control" id="password" name="password" placeholder="Your password" required type="password">
+                </div>
+                <button class="btn btn-primary w-100 py-2" type="submit">Log in</button>
+            </form>
+            <p class="form-help">New here? <a href="{{ url_for('register') }}">Create an account</a></p>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
-        </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
-    </form>
+    </section>
 {% endblock %}
